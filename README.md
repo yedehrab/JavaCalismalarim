@@ -12,7 +12,9 @@ Gezgin, Manipulator ve GezginManipulator robotları ele alan.
 
 gibi yapılar kullanılmıştır.
 
-> Detaylar için [buraya](NetBeans-Projects/Robots/) dökümantasyon için [buraya](NetBeans-Projects/Robots/dist/javadoc/robot/package-summary.html) tıklayabilirsin.
+> Detaylar için [buraya](NetBeans-Projects/Robots/) tıklayabilirsin.
+
+
 ![robots](.kaynaklar/robots.png)
 
 # Java Bookcase App

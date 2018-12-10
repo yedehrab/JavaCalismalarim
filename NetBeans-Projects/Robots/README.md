@@ -9,6 +9,4 @@ Gezgin, Manipulator ve GezginManipulator robotları ele alan.
 
 gibi yapılar kullanılmıştır.
 
-> Dökümantasyon için [buraya](NetBeans-Projects/Robots/dist/javadoc/robot/package-summary.html) tıklayabilirsin.
-
 ![robots](.kaynaklar/robots.png)
