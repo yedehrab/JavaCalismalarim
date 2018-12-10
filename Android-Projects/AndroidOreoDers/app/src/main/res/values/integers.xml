@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="kro_tvRemainingTime">0</integer>
+    <integer name="game_like_tvRemainingTime">20</integer>
+    <integer name="game_like_tvGameScore">0</integer>
+</resources>

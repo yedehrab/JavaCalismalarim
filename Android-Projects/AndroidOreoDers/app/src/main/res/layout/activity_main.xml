@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ImageButton
+        android:id="@+id/ibGoMain"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/ibGoMain_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_home_blue_24px"
+        tools:targetApi="lollipop" />
+
+    <ImageButton
+        android:id="@+id/ibStartKro"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/ibStartKro_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm"
+        android:layout_marginLeft="16dp" />
+
+    <ImageButton
+        android:id="@+id/ibStartLikeGame"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/ibStartGameLike_description"
+        app:layout_constraintStart_toEndOf="@+id/ibStartKro"
+        app:layout_constraintTop_toTopOf="@+id/ibStartKro"
+        app:srcCompat="@mipmap/like16"
+        android:layout_marginLeft="16dp" />
+
+    <ImageButton
+        android:id="@+id/ibStartLandmarkCatalog"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/ibStartLandmarkCatalog_description"
+        app:layout_constraintStart_toEndOf="@+id/ibStartLikeGame"
+        app:layout_constraintTop_toTopOf="@+id/ibStartLikeGame"
+        app:srcCompat="@mipmap/eiffel1_tower24"
+        android:layout_marginLeft="16dp" />
+
+    <ImageButton
+        android:id="@+id/ibStartDataBase"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/ibStartLandmarkCatalog"
+        app:layout_constraintTop_toTopOf="@+id/ibStartLandmarkCatalog"
+        app:srcCompat="@drawable/ic_data_backup_dark_24px"
+        android:layout_marginLeft="16dp"
+        android:contentDescription="@string/ibStartDataBase_description" />
+
+    <ImageButton
+        android:id="@+id/ibStartFavBook"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/ibStartDataBase"
+        app:layout_constraintTop_toTopOf="@+id/ibStartDataBase"
+        app:srcCompat="@drawable/ic_book_24px"
+        android:layout_marginLeft="16dp"
+        android:contentDescription="@string/ibStartFavBook_description" />
+
+</android.support.constraint.ConstraintLayout>

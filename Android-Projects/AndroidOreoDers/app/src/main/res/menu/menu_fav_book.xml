@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_addNote"
+        android:title="@string/menu_addNote_title" />
+    <item
+        android:id="@+id/menu_donate"
+        android:icon="@drawable/ic_start_8px"
+        android:title="@string/menu_donate_title" />
+</menu>

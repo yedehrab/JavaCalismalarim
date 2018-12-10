@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameLikeActivity">
+
+    <ImageButton
+        android:id="@+id/ibGoMain"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:srcCompat="@drawable/ic_home_blue_24px"
+        android:contentDescription="@string/ibGoMain_description"
+        tools:targetApi="lollipop"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:id="@+id/tvRemainingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/game_like_tvRemainingTime"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="369dp"
+        android:layout_height="396dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
+        app:columnCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rowCount="3">
+
+        <ImageView
+            android:id="@+id/ivGameLike02"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="2"
+            app:layout_row="0"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike01"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike00"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="0"
+            app:layout_row="0"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike22"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="2"
+            app:layout_row="2"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike21"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="1"
+            app:layout_row="2"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike20"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="0"
+            app:layout_row="2"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike11"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="1"
+            app:layout_row="1"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike10"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="0"
+            app:layout_row="1"
+            app:srcCompat="@mipmap/like256" />
+
+        <ImageView
+            android:id="@+id/ivGameLike12"
+            android:layout_width="123dp"
+            android:layout_height="132dp"
+            app:layout_column="2"
+            app:layout_row="1"
+            app:srcCompat="@mipmap/like256" />
+
+    </android.support.v7.widget.GridLayout>
+
+    <TextView
+        android:id="@+id/tvGameScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/game_like_tvGameScore_text"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
+</android.support.constraint.ConstraintLayout>

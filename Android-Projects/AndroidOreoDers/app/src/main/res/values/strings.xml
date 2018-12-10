@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">DersCalisma</string>
+    <string name="ibGoMain_description">Going Main</string>
+    <string name="btn_start">Chronometer started</string>
+    <string name="btn_stop">Chronometer stopped</string>
+    <string name="btnStart_text">Start</string>
+    <string name="btnStop_text">Stop</string>
+    <string name="ibStartKro">Chronometer activity is starting</string>
+    <string name="ibStartKro_description">Chronometer</string>
+    <string name="ibStartGameLike">Catch Like Game is starting</string>
+    <string name="ibStartGameLike_description">Catch Like Game</string>
+    <string name="alert_title_error">Error</string>
+    <string name="kro_btnStart_alert_message">Chronometer is already running</string>
+    <string name="kro_btnStop_alert_message">Chronometer is not running</string>
+    <string name="kro_alert_title">Are you sure?</string>
+    <string name="kro_tvRemainingTime">Time: </string>
+    <string name="kro_tvRemainingTime_text">Time: 0</string>
+    <string name="kro_alert_message">İf you quit, data will erase.</string>
+    <string name="kro_alert_positive_button">Im sure</string>
+    <string name="kro_alert_negative_button">Go back</string>
+    <string name="kro_alert_toast_positive">Data has erased</string>
+    <string name="kro_alert_toast_negative">Nothing Happend</string>
+    <string name="game_like_tvRemainingTime">Remaining Time: </string>
+    <string name="game_like_tvRemainingTime_alert_title">Slow down !</string>
+    <string name="game_like_tvRemainingTime_alert_message">Hey, time finished !</string>
+    <string name="game_like_tvGameScore_text">Score: 0</string>
+    <string name="game_like_tvGameScore">Score:</string>
+    <string name="ibStartLandmarkCatalog">Landmark Catalog starting</string>
+    <string name="ibStartLandmarkCatalog_description">LandScape Catalog</string>
+    <string name="you_are_already_in_main">You are already in main :)</string>
+    <string name="ibStartDataBase">Database activity is starting</string>
+    <string name="ibStartDataBase_description">Database activity</string>
+    <string name="alert_message_withoutErasing">You give up, so quick :/</string>
+    <string name="alert_title_withoutErasing">Really?</string>
+    <string name="alert_toast_positive_withoutErasing">Do not be long ;)</string>
+    <string name="btnAddData_text">Add Data</string>
+    <string name="btnDeleteAll_text">Delete All</string>
+    <string name="ibStartFavBook_description">Starts fav book activity</string>
+    <string name="ibStartFavBook">Books of Favourite is starting</string>
+    <string name="menu_addNote_title">Add note</string>
+    <string name="menu_donate_title">Donate :)</string>
+    <string name="btn_save">Save</string>
+    <string name="description_iv_addNoteImage">Tab to get new image your storage</string>
+    <string name="text_tv_addNote">Type Name</string>
+
+
+</resources>

@@ -1,0 +1,8 @@
+Node classı değişti (numSmall eklendi)
+insert metodu değişti
+updateNumSmalls metodu eklendi
+printTree metodu değişti
+printNumSmaller metodu değişti
+getNumSmaller metodu silindi
+getAgeOfNode -> getNumSmallOfNode oldu
+

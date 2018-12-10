@@ -1,0 +1,17 @@
+ Run.bat ile çalistirirsaniz çok daha iyi olur :)
+
+ Hazir ögrenci ve ögretmenler kayitları için mailde gönderilen "Kayitlar" klasorunu 
+.jar uzantılı dosyanın veya src klasörünün yanına kopyalayınız. Eğer veri yoksa program
+kendi varsayılanlarını yapacaktır. (dersProgramı, sınavProgramı, kullanıcı bilgileri admin panelinden oluşturulmalı
+
+ Üye ekleme, silme, güncelleme için Admin menüsü vardir. Menüye erisim için;
+ Öğretmen islemleri açilir ve kullanici adina ? yazip ENTER'a basilir.
+
+Kullanıcı adları: 
+ Ogerciler icin: ogr1, ogr2, ogr3 ... Ogretmenler icin: ogrt1, ogrt2, ogrt3 ... Admin icin: ? 
+Sifreler: kullanıcı adi ile aynidir. (Kolaylik olması adina yapilmistir, sifre farki olabilimekte.)
+
+ Geri kalan talimatlar programa gömülüdür.
+
+Yunus Emre AK 
+1306150001
