@@ -14,6 +14,8 @@ gibi yapılar kullanılmıştır.
 
 > Detaylar için [buraya](NetBeans-Projects/Robots/) tıklayabilirsin.
 
+![robots](.kaynaklar/robots.png)
+
 # Java Bookcase App
 
 Konsol tabancı yarım kalmış kütüphane uygulaması
@@ -55,6 +57,8 @@ JDBC üzerine bir çalışma amaçlı yazılmış kod.
 NYP dersinin sınav sorusunun çözümü
 
 > Detaylar için [buraya](NetBeans-Projects/NYPfinal/) tıklayabilirsin.
+
+![robots](.kaynaklar/nyp-final.png)
 
 # Ogrenci İşleri Otomasyonu
 
