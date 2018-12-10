@@ -9,4 +9,4 @@ Gezgin, Manipulator ve GezginManipulator robotları ele alan.
 
 gibi yapılar kullanılmıştır.
 
-![robots](/../../.kaynaklar/robots.png)
+![robots](../../.kaynaklar/robots.png)
