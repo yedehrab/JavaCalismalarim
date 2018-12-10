@@ -8,10 +8,6 @@ package robot;
 import java.awt.Point;
 import java.util.ArrayList;
 
-/**
- *
- * @author yemre
- */
 public interface Hareket {
     
     // Konum sınırları
@@ -27,7 +23,36 @@ public interface Hareket {
     int YAVAS_GECIS = 2;
     int HIZLI_GECIS = 1;
 
+    /**
+     * Hız değerinin ayarlanması
+     */
     public abstract void hizAyarla();
+    
+    /**
+     * Verilen koordinatlarda engele göre ilerleme
+     * @param x Dikey ilerleme
+     * @param y Yatay ilerleme 
+     * @param engeller İzgaradaki engel verisi
+     * @return Geçen süre
+     */
     public abstract float ilerle(int x, int y, ArrayList<Point> engeller);
+    
+    /**
+     * Engelden geçebilir mi kontrolü
+     * @return Geçiyorsa true, aksi halde false
+     */
+    public abstract boolean engeldenGecebilirMi();
+    
+    /**
+     * Engelden geçerken harcanan süreyi hesaplar
+     * @return Geçen süre
+     */
+    public abstract float engeldenGecmeSuresiBul();
+    
+    /**
+     * Kullanıcıdan alınan komutlarla ilerlemeyi sağlar
+     * @param engeller İzgara üzerindeki engeller
+     * @return Geçen süre
+     */
     public abstract float komutlarlaIlerle(ArrayList<Point> engeller);
 }

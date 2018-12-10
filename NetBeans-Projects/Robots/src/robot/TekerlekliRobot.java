@@ -24,12 +24,4 @@ public class TekerlekliRobot extends GezginRobot {
     public float engeldenGecmeSuresiBul() {
         return (float) HIZLI_GECIS;
     }
-
-    public int getTekerlekSayisi() {
-        return tekerlekSayisi;
-    }
-
-    public void setTekerlekSayisi(int tekerlekSayisi) {
-        this.tekerlekSayisi = tekerlekSayisi;
-    }
 }

@@ -6,11 +6,12 @@
 package robot;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 // Konumu sabittir
-public abstract class ManipulatorRobot extends Robot implements Kol, KolOzellikleri{
+public abstract class ManipulatorRobot extends Robot implements Kol {
     // Yük taşıma kapasitesi (Belli ağırlıkta yük taşıyabilir.)
     protected int yukTasimaKapasitesi;
     
@@ -25,29 +26,70 @@ public abstract class ManipulatorRobot extends Robot implements Kol, KolOzellikl
     
     public ManipulatorRobot() {
         tasimaHiziAyarla();
-        koluAyarla();
+        kolunKonumuAyarla();
         tasimaKapasitesiAyarla();
         kolUzunluguAyarla();
     }
-
-    @Override
-    public final void koluAyarla() {
-        this.kol = new Point(konum);
-    }
-
-    @Override
-    public float komutlarlaKoluIlerlet() {
-        return komutlarlaKoluIlerlet(kol, tasimaHizi, this);
-    }
     
     /**
-     * Komutlarla robotun kolunu ilerletme
-     * @param kol Kol'un noktasal konumu
-     * @param tasimaHizi Taşıma hızı
-     * @param k Kol özellikleri
-     * @return 
+     * Manipülatör robot oluşturur
+     * @param soruMetniOlsun Oluşturma arüyüzünde soru metninin görünürlüğü
+     * @return Oluşturulan manipülatör robot
      */
-    public static float komutlarlaKoluIlerlet(Point kol, int tasimaHizi, KolOzellikleri k) {
+    public static ManipulatorRobot olustur(boolean soruMetniOlsun) {
+        // Kullanıcı girdisini tutacak değişkenler
+        Scanner scan = new Scanner(System.in);
+        int tur;
+        
+        if (soruMetniOlsun)
+            System.out.println("Manipulator robotunun turunu secin:");
+        
+        System.out.println("1- Paralel (Yük Sınırı: 15kg)");
+        System.out.println("2- Seri (Yük Sınırı: 10kg)");
+        tur = scan.nextInt();
+        
+        // \n'i yakalama
+        scan.nextLine();
+
+        switch(tur) {
+            case 1:
+                return new Paralel();
+            case 2:
+                return new Seri();
+            default:
+                System.out.println("Hatali secim yaptiniz");
+                return olustur(soruMetniOlsun);
+        }
+    }
+
+    @Override
+    public Point yukAl() {
+        // Yükü kollarındadır.
+        return kol;
+    }
+    
+    @Override
+    public float baslat(ArrayList<Point> engeller) {
+        // Yükü verme
+        yukVer();
+        
+        // Süreyi bulma
+        float sure = komutlarlaKoluIlerlet();
+        
+        // Ekranda gösterme
+        System.out.println("Toplam geçen süre: " + sure + "s");
+        
+        // Süreyi döndürme
+        return sure;
+    }
+
+    @Override
+    public final void kolunKonumuAyarla() {
+        this.kol = new Point(konum);
+    }
+    
+    @Override
+    public float komutlarlaKoluIlerlet() {
         Scanner scan = new Scanner(System.in);
         
         String komutDizgisi;
@@ -93,7 +135,7 @@ public abstract class ManipulatorRobot extends Robot implements Kol, KolOzellikl
                         continue;
                 }
                 
-                if (k.kolUzayabilirMi(x, y)) {
+                if (kolUzayabilirMi(x, y)) {
                     kol.x += x;
                     kol.y += y;
                     float anlikSure = Math.abs(x) * (Izgara.IZGARA_UZUNLUGU / (float) tasimaHizi) + Math.abs(y) * (Izgara.IZGARA_UZUNLUGU / (float) tasimaHizi);
@@ -110,92 +152,37 @@ public abstract class ManipulatorRobot extends Robot implements Kol, KolOzellikl
         }
     }
     
-    /**
-     * Kolun uzayabilme kontorlü
-     * @param konum Robotun noktasal konumu
-     * @param kol Kolun noktasal konumu
-     * @param x Dikey uzama
-     * @param y Yatay uzama
-     * @param kolUzunlugu En yüksek kol uzunluğu
-     * @return 
-     */
-    public static boolean kolUzayabilirMi(Point konum, Point kol, int x, int y, int kolUzunlugu) {
+    @Override
+    public boolean kolUzayabilirMi(int x, int y) {
         // Kolun yeni konumunu hesaplama
-        Point yeniKol = new Point(kol.x + x, kol.y + y);
+        Point yeniKol = new Point(this.kol.x + x, this.kol.y + y);
         // Kol uzunluğu hesaplama (Birim cinsinsen olduğu için izgara uzunluğu ile çarpmamız lazım)
         double yeniKolUzunlugu = Math.sqrt((Math.pow(yeniKol.x - konum.x, 2) + Math.pow(yeniKol.y - konum.y, 2))) * Izgara.IZGARA_UZUNLUGU;
-        System.out.println("Kol uzunlugu: " + yeniKolUzunlugu + "m En fazla: " + kolUzunlugu + "m");
-        return kolUzunlugu >= yeniKolUzunlugu;
+        System.out.println("Kol uzunlugu: " + yeniKolUzunlugu + "m En fazla: " + this.kolUzunlugu + "m");
+        return this.kolUzunlugu >= yeniKolUzunlugu;
     }
     
-    /**
-     * Robota vük verir
-     * @param robot Robot
-     * @param yuk Yük
-     * @param k Kol özellikleri
-     */
-    public static void yukVer(Robot robot, int yuk, KolOzellikleri k) {
+    @Override
+    public void yukVer() {
         Scanner scan = new Scanner(System.in);
         boolean dongu = true;
         
         while(dongu) {
             System.out.println("Robotunun yuk miktari: (En fazla: paralel " + PARALEL_KAPASITE + "kg, seri " + SERI_KAPASITE + "kg)");
-            System.out.print("Kg -> ");
             int kg = scan.nextInt();
+            scan.nextLine(); // '\n' yakalama
 
-            if (k.kaldirabilirMi(kg)) {
-                robot.setYukMiktari(kg);
+            if (kaldirabilirMi(kg)) {
+                super.yukMiktari = kg;
                 dongu = false;
             } else {
                 System.out.println("Bu yuk miktarini kaldiramaz, yeniden girin");
             }
         }
     }
-    
-    @Override
-    public boolean kolUzayabilirMi(int x, int y) {
-        return kolUzayabilirMi(konum, kol, x, y, kolUzunlugu);
-    }
-    
-    @Override
-    public void yukVer() {
-        yukVer(this, yukMiktari, this);
-    }
 
     @Override
     public final boolean kaldirabilirMi(int yuk) {
         return this.yukTasimaKapasitesi >= yuk;
-    }
-
-    public int getYukTasimaKapasitesi() {
-        return yukTasimaKapasitesi;
-    }
-
-    public void setYukTasimaKapasitesi(int yukTasimaKapasitesi) {
-        this.yukTasimaKapasitesi = yukTasimaKapasitesi;
-    }
-
-    public int getKolUzunlugu() {
-        return kolUzunlugu;
-    }
-
-    public void setKolUzunlugu(int kolUzunlugu) {
-        this.kolUzunlugu = kolUzunlugu;
-    }
-
-    public int getTasimaHizi() {
-        return tasimaHizi;
-    }
-
-    public void setTasimaHizi(int tasimaHizi) {
-        this.tasimaHizi = tasimaHizi;
-    }
-
-    public Point getKol() {
-        return kol;
-    }
-
-    public void setKol(Point kol) {
-        this.kol = kol;
     }
 }

@@ -18,11 +18,7 @@ public class PaletliRobot extends GezginRobot {
     public float engeldenGecmeSuresiBul() {
         return (float) YAVAS_GECIS;
     }
-
-    public int getPaletSayisi() {
-        return paletSayisi;
-    }
-
+    
     public void setPaletSayisi(int paletSayisi) {
         this.paletSayisi = paletSayisi;
     }

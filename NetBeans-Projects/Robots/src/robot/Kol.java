@@ -5,10 +5,6 @@
  */
 package robot;
 
-/**
- *
- * @author yemre
- */
 public interface Kol {
     int TASIMA_HIZI_YAVAS = 10;
     int TASIMA_HIZI_HIZLI = 20;
@@ -19,12 +15,49 @@ public interface Kol {
     int PARALEL_KOL = 50;
     int SERI_KOL = 20;
     
+    /**
+     * Kullanıcıdan alınan verilerle kolu ilerletmeyi sağlar
+     * @return Geçen süre
+     */
     public abstract float komutlarlaKoluIlerlet();
+    
+    /**
+     * Kolun uzayabilirliğinin kontrolü
+     * @param x Dikey uzama
+     * @param y Yatay uzama
+     * @return Uzayabilirse true
+     */
     public abstract boolean kolUzayabilirMi(int x, int y);
-    public abstract void yukVer();
+    
+    /**
+     * Verilen yükün kaldırılabilirliğinin kontrolü
+     * @param yuk Yük değeri
+     * @return Kaldırılırsa true
+     */
     public abstract boolean kaldirabilirMi(int yuk);
+    
+    /**
+     * Yük verme eylemi
+     */
+    public abstract void yukVer();
+    
+    /**
+     * Taşıma kapasitesini ayarlama
+     */
     public abstract void tasimaKapasitesiAyarla(); 
+    
+    /**
+     * Kolun uzunluğunu ayarlama
+     */
     public abstract void kolUzunluguAyarla();
-    public abstract void koluAyarla();
+    
+    /**
+     * Kolun konumunu ayarlama
+     */
+    public abstract void kolunKonumuAyarla();
+    
+    /** 
+     * Taşıma hızını ayarlama
+     */
     public abstract void tasimaHiziAyarla();
 }

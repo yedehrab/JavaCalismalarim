@@ -20,140 +20,142 @@ import javax.swing.JPanel;
 public class Izgara extends JPanel {
     
     public static final int IZGARA_UZUNLUGU = 10;
+    public static final int KARE_SAYISI = 20;
+    public static final int KENAR_UZUNLUGU = 30; // 10m
     
-    private final int kareSayisi = 20;
-    private final int kenarUzunlugu = 30; // 10
     private final int uzunluk;
     private final int genislik;
     
+    private final ArrayList<Robot> robotlar = new ArrayList<Robot>();
     private final ArrayList<Point> engeller = new ArrayList<Point>();
-    private Point yuk;
-    private Robot robot;
+    private final ArrayList<Point> yukler = new ArrayList<Point>();
     
+    /**
+     * Başlangıç işlemleri
+     * @param args Kullanılmamaktadır. 
+     */
     public static void main(String args[]) {
-        // Gezgin robot seçme
-        Scanner scan = new Scanner(System.in);
-        int tur;
-        
-        while (true) {
-            Izgara izgara = new Izgara();
-            
-            System.out.println("Çözülecek problemi seçin");
-            System.out.println("1- Problem1 (Gezgin Robot)");
-            System.out.println("2- Problem2 (Manipülatör Robot)");
-            System.out.println("3- Problem3 (GezginManipülatör Robot)");
-            System.out.println("0- Çıkış");
-            tur = scan.nextInt();
+        Izgara izgara = new Izgara();
+        izgara.robotlariTanimla();
+        izgara.engelEklensinMi();
+        izgara.robotHareketEttir();
 
-            switch (tur) {
-                case 0:
-                    System.exit(0);
-                case 1:
-                    izgara.problem1();
-                    break;
-                case 2:
-                    izgara.problem2();
-                    break;
-                case 3:
-                    izgara.problem3();
-                    break;
-            }
         JFrame frame = new JFrame("Robotlar");
-        
+
         // Izgareyı çerçeveye ekleme
         frame.add(izgara);
         // Çerçeveyi ortada gösterme
         frame.setLocationRelativeTo(null);
+        // X'a basılınca process'i kapatma
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Otomatik boyutlandırma
         frame.pack();
         // Çerçeveyi görünür kılma
         frame.setVisible(true);
-        
-        }
     }
     
     public Izgara() {
         super();
         
         // Uzunluğu ve genişliği hesaplama
-        uzunluk = genislik = kareSayisi * kenarUzunlugu;
+        uzunluk = genislik = KARE_SAYISI * KENAR_UZUNLUGU;
     }
     
-    public void problem3() {
-        engelEklensinMi();
-        gezginManipulatorKullan();
-    }
-    
-    public void problem2() {
-        manipulatorRobotKullan();
-    }
-    
-    public void problem1() {
-        engelEklensinMi();
-        gezginRobotKullan();
-    }
-    
-    public void gezginManipulatorKullan() {
-        // Manipulator robot
-        System.out.println("Hız: 30m/s Yük Sınırı: 15kg");
-        GezginManipulatorRobot gmr = new GezginManipulatorRobot();
-        
-        // Robotu başlatma
-        gmr.baslat(engeller);
-
-        // Yükü tanımlama1
-        yuk = gmr.getKol();
-
-        // Robotu tanımlama
-        robot = gmr;
-        
-    }
-    
-    public void manipulatorRobotKullan() {
-        // Manipulator robot
-        ManipulatorRobot mr;
-        
-        // Gezgin robot seçme
+    /**
+     * İzgara üzerinde robotları tanımlayamayı sağlar.
+     */
+    public void robotlariTanimla() {
+        // Kullanıcıdan alınacak değerleri tutacak değişkenler
         Scanner scan = new Scanner(System.in);
-        int tur;
+       
+        int i,robotSayisi, robotTuru;
         
-        System.out.println("Manipulator robotunun turunu secin:");
-        System.out.println("1- Paralel (Yük Sınırı: 15kg)");
-        System.out.println("2- Seri (Yük Sınırı: 10kg)");
-        System.out.println("0- Çıkış");
-        tur = scan.nextInt();
-        
-        // \n'i yakalama
-        scan.nextLine();
+        // Arayüz
+        System.out.println("Tanımlanacak robot sayısı: ");
+        robotSayisi = scan.nextInt();
+        scan.nextLine(); // '\n' yakalama
 
-        switch(tur) {
-            case 0:
-                System.exit(0);
-            case 1:
-                mr = new Paralel();
-                break;
-            case 2:
-                mr = new Seri();
-                break;
-            default:
-                System.out.println("Hatali secim yaptiniz");
-                manipulatorRobotKullan();
-                return;
-        }
-        
-        if (mr != null) {
-            mr.yukVer();
-            System.out.println("Toplam sure: " + mr.komutlarlaKoluIlerlet() + "s");
-            
-            // Yükü tanımlama
-            yuk = mr.getKol();
-            
-            // Robotu tanımlama
-            robot = mr;
+        for (i = 0; i < robotSayisi; i++) {
+            System.out.println((i + 1) + ". robotun tipi: ");
+            System.out.println("-------------------");
+            System.out.println("1- Hibrit (GezginManipulator) ");
+            System.out.println("2- Gezgin ");
+            System.out.println("3- Manipulatör");
+            robotTuru = scan.nextInt();
+            scan.nextLine(); // '\n' yakalama
+
+            switch (robotTuru) {
+                case 1:
+                    gezginManipulatorEkle();
+                    break;
+                case 2:
+                    gezginRobotEkle();
+                    break;
+                case 3:
+                    manipulatorRobotEkle();
+                    break;
+                default:
+                    System.out.println("Robot tipi hatalı girildi tekrar deneyin.");
+                    i--;
+                    break;
+            }
         }
     }
     
+    /**
+     * İstenen bir robotu hareket ettirmeyi sağlar.
+     */
+    public void robotHareketEttir() {
+        // Kullanıcıdan alınacak değerleri tutacak değişkenler
+        Scanner scan = new Scanner(System.in);
+        int robotNo;
+        
+        // Arayüz
+        System.out.println("Hangi siradaki robot hareket ettirelecek: (1'denb başlar)");
+        robotNo = scan.nextInt() - 1;
+        scan.nextLine(); // '\n' yakalama
+
+        if (robotNo < robotlar.size()) {
+            robotlar.get(robotNo).baslat(engeller);
+            yukler.add(robotlar.get(robotNo).yukAl());
+        } else {
+            System.out.println("Robot sayısından fazla değer giremezsiniz.");
+            robotHareketEttir();
+        }
+    }
+    
+    /**
+     * İzgaraya gezgin robot ekleme menüsü
+     */
+    public void gezginManipulatorEkle() {
+        GezginManipulatorRobot gmr = GezginManipulatorRobot.olustur();
+        gmr.yerlestir();
+        robotlar.add(gmr);
+    }
+    
+    /**
+     * İzgaraya manipülator robot ekleme menüsü
+     */
+    public void manipulatorRobotEkle() {
+        ManipulatorRobot mr = ManipulatorRobot.olustur(true);
+        mr.yerlestir();
+        robotlar.add(mr);
+    }
+    
+    /**
+     * İzgarae gezgin robot ekleme menüsü
+     */
+    public void gezginRobotEkle() {
+        GezginRobot gr = GezginRobot.olustur(true);
+        gr.yerlestir();
+        robotlar.add(gr);
+    }
+    
+    /**
+     * İzgaraya engel ekleme menüsü
+     */
     public void engelEklensinMi() {
+        // Kullanıcı girdisini tutacak değişkenler
         Scanner scan = new Scanner(System.in);
         int cevap;
         
@@ -186,42 +188,7 @@ public class Izgara extends JPanel {
         }
     }
     
-    public void gezginRobotKullan() {
-        // Gezgin robot seçme
-        Scanner scan = new Scanner(System.in);
-        int tur;
-        
-        System.out.println("Gezgin robotunun turunu secin:");
-        System.out.println("0- Tekerlekli ( Hız: 30m/s )");
-        System.out.println("1- Paletli ( Hız: 20m/s )");
-        System.out.println("2- Spider ( Hız: 10m/s )");
-        tur = scan.nextInt();
-        
-        // \n'i yakalama
-        scan.nextLine();
-
-        switch(tur) {
-            case 0:
-                TekerlekliRobot tr = new TekerlekliRobot();
-                System.out.println("Geçen süre: " + tr.komutlarlaIlerle(engeller));
-                robot = tr;
-                break;
-            case 1:
-                PaletliRobot pr = new PaletliRobot();
-                System.out.println("Geçen süre: " + pr.komutlarlaIlerle(engeller));
-                robot = pr;
-                break;
-            case 2:
-                SpiderRobot sr = new SpiderRobot();
-                System.out.println("Geçen süre: " + sr.komutlarlaIlerle(engeller));
-                robot = sr;
-                break;
-            default:
-                System.out.println("Hatali secim yaptiniz");
-                gezginRobotKullan();
-        }
-        
-    }
+    
 
     @Override
     protected void paintComponent (Graphics g) {
@@ -231,8 +198,8 @@ public class Izgara extends JPanel {
         
         // Izgaraları gri renkte çizme
         g2d.setColor(Color.gray);
-        for (int i = 0; i < kareSayisi; i++) {
-            for (int j = 0; j < kareSayisi; j++) {
+        for (int i = 0; i < KARE_SAYISI; i++) {
+            for (int j = 0; j < KARE_SAYISI; j++) {
                 g2d.draw(kareOlustur(new Point(i, j)));
             }
         }
@@ -243,28 +210,32 @@ public class Izgara extends JPanel {
             g2d.fill(kareOlustur(engel));
         });
         
-        
-        // Yük varsa çizdirme
-        if (yuk != null) {
-            // Yükü gri renkte çizme
-            g2d.setColor(Color.gray);
+        // Yükleri gri renkte çizme
+        g2d.setColor(Color.gray);
+        yukler.forEach((yuk) -> {
             g2d.fill(kareOlustur(yuk));
-        }
+        });
         
-        
-        // Robotu yeşil renkte çizme
+        // Robotları yeşil renkte çizme
         g2d.setColor(Color.green);
-        g2d.fill(kareOlustur(robot.konum));
+        robotlar.forEach((robot) -> {
+            g2d.fill(kareOlustur(robot.konum));
+        });
         
         g2d.dispose();
     }
    
+    /**
+     * Verilen nokta ile ızgarada kare üretir
+     * @param p Nokta
+     * @return Izgaraya çizilebilir kare verisi
+     */
     public Rectangle kareOlustur(Point p) {
         return new Rectangle(
-            p.x * kenarUzunlugu,
-            p.y * kenarUzunlugu,
-            kenarUzunlugu,
-            kenarUzunlugu
+            p.x * KENAR_UZUNLUGU,
+            p.y * KENAR_UZUNLUGU,
+            KENAR_UZUNLUGU,
+            KENAR_UZUNLUGU
         );
     }
     
