@@ -141,11 +141,8 @@ public abstract class ManipulatorRobot extends Robot implements Kol {
                     float anlikSure = Math.abs(x) * (Izgara.IZGARA_UZUNLUGU / (float) tasimaHizi) + Math.abs(y) * (Izgara.IZGARA_UZUNLUGU / (float) tasimaHizi);
                     sure += anlikSure;
                     System.out.println("Taşıma hızı: " + tasimaHizi + "m/s Geçen Sure: " + anlikSure + "s Toplam Süre: " + sure + "s") ;
-                } else {
-                    System.out.println("Kol uzunluğunu aşamazsınız.");
                 }
-               
-            
+                
             } catch (NumberFormatException | java.lang.ArrayIndexOutOfBoundsException e) {
                 System.out.println("Komut formatı hatalı");
             }
@@ -156,10 +153,23 @@ public abstract class ManipulatorRobot extends Robot implements Kol {
     public boolean kolUzayabilirMi(int x, int y) {
         // Kolun yeni konumunu hesaplama
         Point yeniKol = new Point(this.kol.x + x, this.kol.y + y);
-        // Kol uzunluğu hesaplama (Birim cinsinsen olduğu için izgara uzunluğu ile çarpmamız lazım)
-        double yeniKolUzunlugu = Math.sqrt((Math.pow(yeniKol.x - konum.x, 2) + Math.pow(yeniKol.y - konum.y, 2))) * Izgara.IZGARA_UZUNLUGU;
-        System.out.println("Kol uzunlugu: " + yeniKolUzunlugu + "m En fazla: " + this.kolUzunlugu + "m");
-        return this.kolUzunlugu >= yeniKolUzunlugu;
+        
+        // Izgara dışına çıkmazsa kol uzunluğunu kontrol edeceğiz
+        if (yeniKol.x >= 0 && yeniKol.y >= 0 && yeniKol.x < Izgara.KARE_SAYISI && yeniKol.y < Izgara.KARE_SAYISI) {
+            // Kol uzunluğu hesaplama (Birim cinsinsen olduğu için izgara uzunluğu ile çarpmamız lazım)
+            double yeniKolUzunlugu = Math.sqrt((Math.pow(yeniKol.x - konum.x, 2) + Math.pow(yeniKol.y - konum.y, 2))) * Izgara.IZGARA_UZUNLUGU;
+            System.out.println("Kol uzunlugu: " + yeniKolUzunlugu + "m En fazla: " + this.kolUzunlugu + "m");
+            
+            if (kolUzunlugu < yeniKolUzunlugu) {
+                System.out.println("Kol uzunluğunu aşamazsınız!");
+                return false;
+            }
+            
+            return true;
+        }
+        
+        System.out.println("Izgara dışına çıkamazsınız!");
+        return false;
     }
     
     @Override
