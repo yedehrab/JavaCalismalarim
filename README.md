@@ -1,6 +1,12 @@
 # JavaCalismalarim
 Java dili üzerine yapmış olduğum çalışma amaçlı geçici projeler.
 
+## Java Bookcase
+Konsol tabanlı kütüphane uygulaması
+
+* SQL kullanılan için [buraya](NetBeans-Projects/Bookcase-SQL/) 
+* Dosya işlemleri kullanılan için [buraya](NetBeans-Projects/Bookcase-FileOp/) 
+
 # Java Robots
 
 Gezgin, Manipulator ve GezginManipulator robotları ele alan. 
@@ -16,12 +22,6 @@ gibi yapılar kullanılmıştır.
 
 
 ![robots](.kaynaklar/robots.png)
-
-# Java Bookcase App
-
-Konsol tabancı yarım kalmış kütüphane uygulaması
-
-> Detaylar için [buraya](Stand-Alone-Projects/JavaBookcaseApp/) tıklayabilirsin.
 
 # Java Augmented RB-Tree & RB-Tree 
 
