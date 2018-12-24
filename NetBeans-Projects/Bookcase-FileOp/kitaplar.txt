@@ -1,0 +1,8 @@
+1,ormantipi,ahmet,5
+2,agactipi,ali,10
+3,kustipi,ayse,25
+4,kremittipi,fatma,15
+5,tropikaldoga,ali,25
+6,agactipi,zeynep,100
+7,bilincaltikesfi,sueada,75
+8,tesirli,ates,35
